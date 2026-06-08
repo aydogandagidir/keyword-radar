@@ -3,6 +3,36 @@
   "version": "0.1.0",
   "private": true,
   "description": "Manifest V3 Chrome Extension and lightweight dashboard for Turkish marketplace keyword opportunity research.",
+  "homepage": "https://github.com/aydogandagidir/keyword-radar#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aydogandagidir/keyword-radar.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aydogandagidir/keyword-radar/issues",
+    "email": "destek@bluedev.dev"
+  },
+  "keywords": [
+    "chrome-extension",
+    "manifest-v3",
+    "keyword-research",
+    "marketplace",
+    "amazon",
+    "trendyol",
+    "n11",
+    "e-commerce",
+    "seo",
+    "autocomplete",
+    "csv",
+    "xlsx",
+    "turkish",
+    "bluedev"
+  ],
+  "author": {
+    "name": "Bluedev",
+    "url": "https://bluedev.dev"
+  },
+  "license": "UNLICENSED",
   "packageManager": "pnpm@9.15.4",
   "scripts": {
     "build": "pnpm -r --sort build",
