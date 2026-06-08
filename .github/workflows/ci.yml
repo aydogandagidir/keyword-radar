@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  quality:
+    name: Typecheck, lint, test, build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # pnpm must be set up before setup-node so the pnpm cache works.
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Test
+        run: pnpm test
+
+      - name: Build (packages + extension + web)
+        run: pnpm build
+
+  # NOTE: Two release gates are intentionally NOT in CI yet:
+  #  - E2E (pnpm test:e2e) drives live marketplace sites and is flaky for CI.
+  #  - package:extension uses a PowerShell script (Windows-only). Once the
+  #    packaging approach is settled, add a windows-latest job that runs
+  #    `pnpm package:extension` and uploads the CWS zip as an artifact.

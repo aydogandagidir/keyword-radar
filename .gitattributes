@@ -1,0 +1,14 @@
+# Normalize text files to LF in the repository and working tree.
+# Keeps Windows dev and the Ubuntu CI runner consistent (no CRLF churn).
+* text=auto eol=lf
+
+# Windows-only PowerShell packaging script stays CRLF.
+*.ps1 text eol=crlf
+
+# Treat binary assets as binary (no EOL conversion, no diff).
+*.png binary
+*.woff2 binary
+*.zip binary
+*.ico binary
+*.jpg binary
+*.jpeg binary

@@ -1,0 +1,7 @@
+**/dist/**
+**/.next/**
+**/node_modules/**
+release/**
+pnpm-lock.yaml
+apps/web/.data/**
+apps/extension/src/assets/**

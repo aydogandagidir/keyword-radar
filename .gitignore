@@ -1,0 +1,36 @@
+apps/web/.data/
+apps/*/.next/
+apps/*/tsconfig.tsbuildinfo
+test-results/
+tests/e2e/results/
+apps/*/dist/
+packages/*/dist/
+node_modules/
+release/
+
+# Logs
+*.log
+pnpm-debug.log*
+npm-debug.log*
+yarn-debug.log*
+
+# Coverage / Playwright artifacts
+coverage/
+playwright-report/
+playwright/.cache/
+
+# TypeScript build info
+*.tsbuildinfo
+
+# Env files
+.env
+.env.local
+.env.*.local
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.idea/
+
+# Claude Code local settings
+.claude/settings.local.json

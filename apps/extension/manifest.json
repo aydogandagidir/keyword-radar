@@ -1,0 +1,67 @@
+{
+  "manifest_version": 3,
+  "name": "Bluedev Marketplace Keyword Radar",
+  "description": "Collect user-initiated autocomplete keyword suggestions from Turkish marketplace search pages.",
+  "version": "0.1.0",
+  "icons": {
+    "16": "assets/icons/icon-16.png",
+    "32": "assets/icons/icon-32.png",
+    "48": "assets/icons/icon-48.png",
+    "128": "assets/icons/icon-128.png"
+  },
+  "permissions": ["activeTab", "storage"],
+  "host_permissions": [
+    "https://amazon.com.tr/*",
+    "https://www.amazon.com.tr/*",
+    "https://trendyol.com/*",
+    "https://www.trendyol.com/*",
+    "https://n11.com/*",
+    "https://www.n11.com/*"
+  ],
+  "background": {
+    "service_worker": "assets/background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://amazon.com.tr/*",
+        "https://www.amazon.com.tr/*",
+        "https://trendyol.com/*",
+        "https://www.trendyol.com/*",
+        "https://n11.com/*",
+        "https://www.n11.com/*"
+      ],
+      "js": ["assets/content.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://trendyol.com/*", "https://www.trendyol.com/*"],
+      "js": ["assets/trendyolBridge.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["assets/xlsx.js", "assets/trendyolBridge.js", "assets/fonts/bluedev-geist-latin-ext.woff2"],
+      "matches": [
+        "https://amazon.com.tr/*",
+        "https://www.amazon.com.tr/*",
+        "https://trendyol.com/*",
+        "https://www.trendyol.com/*",
+        "https://n11.com/*",
+        "https://www.n11.com/*"
+      ]
+    }
+  ],
+  "action": {
+    "default_title": "Toggle Keyword Radar",
+    "default_icon": {
+      "16": "assets/icons/icon-16.png",
+      "32": "assets/icons/icon-32.png",
+      "48": "assets/icons/icon-48.png",
+      "128": "assets/icons/icon-128.png"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "name": "bluedev-marketplace-keyword-radar",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Manifest V3 Chrome Extension and lightweight dashboard for Turkish marketplace keyword opportunity research.",
+  "packageManager": "pnpm@9.15.4",
+  "scripts": {
+    "build": "pnpm -r --sort build",
+    "icons": "node scripts/generate-icons.mjs",
+    "dev:extension": "pnpm --filter @bluedev/extension dev",
+    "dev:web": "pnpm --filter @bluedev/web dev",
+    "test": "vitest run",
+    "test:e2e": "pnpm --filter @bluedev/extension build && playwright test tests/e2e/marketplace-extension-qa.spec.ts",
+    "package:extension": "pnpm --filter @bluedev/extension build && powershell -NoProfile -ExecutionPolicy Bypass -File scripts/package-extension.ps1",
+    "test:watch": "vitest",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"**/*.{ts,tsx,mjs,json,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,mjs,json,md}\"",
+    "typecheck": "pnpm -r --sort typecheck",
+    "clean": "pnpm -r exec powershell -NoProfile -Command \"if (Test-Path dist) { Remove-Item -Recurse -Force dist }; if (Test-Path .next) { Remove-Item -Recurse -Force .next }\""
+  },
+  "devDependencies": {
+    "@eslint/js": "^9",
+    "@playwright/test": "^1.60.0",
+    "@types/chrome": "0.0.268",
+    "@types/node": "22.7.5",
+    "@vitejs/plugin-react": "4.3.3",
+    "eslint": "^9",
+    "eslint-config-prettier": "^9",
+    "eslint-plugin-react": "^7",
+    "eslint-plugin-react-hooks": "^5",
+    "globals": "^15",
+    "jsdom": "25.0.1",
+    "prettier": "^3",
+    "typescript": "5.6.3",
+    "typescript-eslint": "^8",
+    "vite": "5.4.11",
+    "vitest": "2.1.5"
+  }
+}

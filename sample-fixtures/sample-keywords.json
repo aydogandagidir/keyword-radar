@@ -1,0 +1,10 @@
+{
+  "seed": "kablosuz kulaklık",
+  "marketplaces": ["amazon-tr", "trendyol", "hepsiburada", "n11"],
+  "suggestions": [
+    {"marketplaceId": "trendyol", "keyword": "kablosuz kulaklık bluetooth", "position": 1},
+    {"marketplaceId": "hepsiburada", "keyword": "kablosuz kulaklık mikrofonlu", "position": 2},
+    {"marketplaceId": "n11", "keyword": "kablosuz kulaklık spor", "position": 3},
+    {"marketplaceId": "amazon-tr", "keyword": "kablosuz kulaklık şarj kutulu", "position": 4}
+  ]
+}
