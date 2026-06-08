@@ -27,6 +27,13 @@ export default defineConfig({
             resolve(__dirname, `dist/assets/icons/icon-${size}.png`)
           );
         }
+        for (const locale of ["en", "tr"]) {
+          mkdirSync(resolve(__dirname, `dist/_locales/${locale}`), { recursive: true });
+          copyFileSync(
+            resolve(__dirname, `_locales/${locale}/messages.json`),
+            resolve(__dirname, `dist/_locales/${locale}/messages.json`)
+          );
+        }
       }
     }
   ],

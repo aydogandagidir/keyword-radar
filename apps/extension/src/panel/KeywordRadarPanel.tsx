@@ -4,12 +4,20 @@ import { analyzeListingGap, scoreSuggestion } from "@bluedev/scoring";
 import type { KeywordExpansionMode, KeywordSuggestion, ListingGapAnalysis, MarketplaceAdapter, MarketplaceSearchControl } from "@bluedev/shared-types";
 import { saveKeywordRunLocally } from "../storage/saved-runs";
 import type { ExtensionMessage } from "../messaging/types";
+import {
+  createTranslator,
+  type LocalePref,
+  type MessageKey,
+  readLocalePref,
+  resolveLocale,
+  writeLocalePref
+} from "../i18n";
 
-const modes: Array<{ id: KeywordExpansionMode; label: string }> = [
-  { id: "original", label: "Seed" },
-  { id: "suffix-alpha", label: "Keyword + A-Z" },
-  { id: "prefix-alpha", label: "A-Z + keyword" },
-  { id: "suffix-numeric", label: "Keyword + 0-9" }
+const modes: Array<{ id: KeywordExpansionMode; labelKey: MessageKey }> = [
+  { id: "original", labelKey: "mode.original" },
+  { id: "suffix-alpha", labelKey: "mode.suffixAlpha" },
+  { id: "prefix-alpha", labelKey: "mode.prefixAlpha" },
+  { id: "suffix-numeric", labelKey: "mode.suffixNumeric" }
 ];
 const defaultModes: KeywordExpansionMode[] = ["original", "suffix-alpha"];
 type CollectionSpeed = "fast" | "balanced" | "reliable";
@@ -19,10 +27,10 @@ type CollectionSpeedProfile = {
   suggestionDelaysMs: number[];
   trendyolBridgeTimeoutMs: number;
 };
-const speedModes: Array<{ id: CollectionSpeed; label: string }> = [
-  { id: "fast", label: "Fast" },
-  { id: "balanced", label: "Balanced" },
-  { id: "reliable", label: "Reliable" }
+const speedModes: Array<{ id: CollectionSpeed; labelKey: MessageKey }> = [
+  { id: "fast", labelKey: "speed.fast" },
+  { id: "balanced", labelKey: "speed.balanced" },
+  { id: "reliable", labelKey: "speed.reliable" }
 ];
 const speedProfiles: Record<CollectionSpeed, CollectionSpeedProfile> = {
   fast: {
@@ -112,12 +120,30 @@ export function KeywordRadarPanel({ adapter }: { adapter: MarketplaceAdapter }) 
   const [panelSize, setPanelSize] = useState<PanelSize | null>(null);
   const [panelPosition, setPanelPosition] = useState<PanelPosition | null>(null);
   const [analysisHeight, setAnalysisHeight] = useState<number | null>(null);
+  const [localePref, setLocalePref] = useState<LocalePref>("auto");
 
+  const t = useMemo(() => createTranslator(resolveLocale(localePref)), [localePref]);
   const wordFrequency = useMemo(() => calculateWordFrequency(suggestions).slice(0, 8), [suggestions]);
   const coverage = useMemo(() => compareMarketplaceCoverage(suggestions).slice(0, 8), [suggestions]);
   const salesActions = useMemo(() => buildSalesActions(suggestions, seed), [suggestions, seed]);
   const totalOccurrences = useMemo(() => suggestions.reduce((sum, suggestion) => sum + (suggestion.occurrenceCount ?? 1), 0), [suggestions]);
-  const statusLabel = status === "collecting" ? "Collecting" : status === "done" ? "Collected" : status === "error" ? "Error" : "Ready";
+  const statusLabel =
+    status === "collecting"
+      ? t("status.collecting")
+      : status === "done"
+        ? t("status.collected")
+        : status === "error"
+          ? t("status.error")
+          : t("status.ready");
+
+  useEffect(() => {
+    void readLocalePref().then(setLocalePref);
+  }, []);
+
+  function updateLocalePref(next: LocalePref) {
+    setLocalePref(next);
+    void writeLocalePref(next);
+  }
 
   useEffect(() => {
     void readCollapsedPreference().then(setIsCollapsed);
@@ -603,12 +629,12 @@ export function KeywordRadarPanel({ adapter }: { adapter: MarketplaceAdapter }) 
   if (isCollapsed) {
     return (
       <section ref={panelRef} className="radar-panel radar-panel-collapsed" style={getPanelStyle(null, panelPosition)} aria-label="Bluedev Marketplace Keyword Radar">
-        <div className="collapsed-bar" onPointerDown={startCollapsedPanelDrag} onClick={handleCollapsedClick} onDoubleClick={expandPanelFromCollapsed} aria-label="Drag collapsed Keyword Radar panel">
+        <div className="collapsed-bar" onPointerDown={startCollapsedPanelDrag} onClick={handleCollapsedClick} onDoubleClick={expandPanelFromCollapsed} aria-label={t("a11y.dragCollapsed")}>
           <div>
             <span>Keyword Radar</span>
             <strong>{adapter.name}</strong>
           </div>
-          <button type="button" className="collapsed-expand-button" onClick={expandPanelFromCollapsed} aria-label="Expand Keyword Radar" title="Expand">
+          <button type="button" className="collapsed-expand-button" onClick={expandPanelFromCollapsed} aria-label={t("a11y.expand")} title={t("a11y.expandTitle")}>
             <Icon name="expand" />
           </button>
         </div>
@@ -624,11 +650,23 @@ export function KeywordRadarPanel({ adapter }: { adapter: MarketplaceAdapter }) 
           <h1>{adapter.name}</h1>
         </div>
         <div className="header-actions">
+          <select
+            className="locale-select"
+            aria-label={t("locale.label")}
+            value={localePref}
+            onPointerDown={(event) => event.stopPropagation()}
+            onChange={(event) => updateLocalePref(event.target.value as LocalePref)}
+            style={{ fontSize: 11, padding: "2px 6px", borderRadius: 6, border: "1px solid rgba(148, 163, 184, 0.4)", background: "transparent", color: "inherit", cursor: "pointer" }}
+          >
+            <option value="auto">{t("locale.auto")}</option>
+            <option value="en">EN</option>
+            <option value="tr">TR</option>
+          </select>
           <span className={`status status-${status}`}>{statusLabel}</span>
-          <button type="button" className="icon-button" onClick={() => updateCollapsedPreference(true)} aria-label="Collapse Keyword Radar" title="Collapse">
+          <button type="button" className="icon-button" onClick={() => updateCollapsedPreference(true)} aria-label={t("a11y.collapse")} title={t("a11y.collapseTitle")}>
             <Icon name="collapse" />
           </button>
-          <button type="button" className="icon-button close-button" onClick={closePanel} aria-label="Close Keyword Radar" title="Close">
+          <button type="button" className="icon-button close-button" onClick={closePanel} aria-label={t("a11y.close")} title={t("a11y.closeTitle")}>
             <Icon name="close" />
           </button>
         </div>
@@ -636,43 +674,43 @@ export function KeywordRadarPanel({ adapter }: { adapter: MarketplaceAdapter }) 
 
       <div className="control-grid">
         <label className="field seed-field">
-          <span>Seed keyword</span>
-          <input value={seed} onChange={(event) => setSeed(event.target.value)} placeholder="headphones" aria-label="Seed keyword" />
+          <span>{t("field.seed")}</span>
+          <input value={seed} onChange={(event) => setSeed(event.target.value)} placeholder={t("field.seedPlaceholder")} aria-label={t("field.seed")} />
         </label>
       </div>
 
-      <div className="mode-grid" aria-label="Expansion modes">
+      <div className="mode-grid" aria-label={t("a11y.modes")}>
         {modes.map((mode) => (
           <label key={mode.id} className="check">
             <input type="checkbox" checked={selectedModes.includes(mode.id)} onChange={() => toggleMode(mode.id)} />
-            <span>{mode.label}</span>
+            <span>{t(mode.labelKey)}</span>
           </label>
         ))}
       </div>
 
-      <div className="speed-grid" aria-label="Collection speed">
+      <div className="speed-grid" aria-label={t("a11y.speed")}>
         {speedModes.map((speed) => (
           <label key={speed.id} className="speed-option">
             <input type="radio" name="bluedev-keyword-radar-speed" checked={selectedSpeed === speed.id} onChange={() => updateSpeed(speed.id)} disabled={status === "collecting"} />
-            <span>{speed.label}</span>
+            <span>{t(speed.labelKey)}</span>
           </label>
         ))}
       </div>
 
       <div className="actions">
         <button type="button" onClick={collect} disabled={!seed.trim() || selectedModes.length === 0 || status === "collecting"}>
-          Collect
+          {t("action.collect")}
         </button>
         <button type="button" className="secondary" onClick={stop} disabled={status !== "collecting"}>
-          Stop
+          {t("action.stop")}
         </button>
       </div>
 
       {progress.total > 0 ? (
-        <div className={`progress progress-${status}`} aria-label="Collection progress">
+        <div className={`progress progress-${status}`} aria-label={t("a11y.progress")}>
           <div style={{ width: `${Math.min(100, (progress.current / progress.total) * 100)}%` }} />
           <span>
-            Queries {progress.current}/{progress.total}
+            {t("progress.queries")} {progress.current}/{progress.total}
           </span>
         </div>
       ) : null}
@@ -680,35 +718,35 @@ export function KeywordRadarPanel({ adapter }: { adapter: MarketplaceAdapter }) 
       {error ? <p className="error">{error}</p> : null}
 
       <div className="summary-bar">
-        <div className="metrics" aria-label="Collection summary">
+        <div className="metrics" aria-label={t("a11y.summary")}>
           <span>
             <strong>{suggestions.length}</strong>
-            <small>keywords</small>
+            <small>{t("metric.keywords")}</small>
           </span>
           <span>
             <strong>{totalOccurrences}</strong>
-            <small>hits</small>
+            <small>{t("metric.hits")}</small>
           </span>
           <span>
             <strong>{progress.total || 0}</strong>
-            <small>queries</small>
+            <small>{t("metric.queries")}</small>
           </span>
         </div>
-        <div className="toolbar" aria-label="Export actions">
-          <button type="button" className="secondary copy-export-button" onClick={copyResults} disabled={suggestions.length === 0} aria-label="Copy results" title="Copy results">
+        <div className="toolbar" aria-label={t("a11y.exportActions")}>
+          <button type="button" className="secondary copy-export-button" onClick={copyResults} disabled={suggestions.length === 0} aria-label={t("a11y.copyResults")} title={t("a11y.copyResults")}>
             <Icon name="copy" />
-            <span>Copy</span>
+            <span>{t("action.copy")}</span>
           </button>
-          <button type="button" className="secondary" onClick={exportCsv} disabled={suggestions.length === 0} aria-label="Export CSV" title="Export CSV">
+          <button type="button" className="secondary" onClick={exportCsv} disabled={suggestions.length === 0} aria-label={t("a11y.exportCsv")} title={t("a11y.exportCsv")}>
             <Icon name="csv" />
-            <span>CSV</span>
+            <span>{t("action.csv")}</span>
           </button>
-          <button type="button" className="secondary" onClick={() => void exportXlsx()} disabled={suggestions.length === 0} aria-label="Export XLSX" title="Export XLSX">
+          <button type="button" className="secondary" onClick={() => void exportXlsx()} disabled={suggestions.length === 0} aria-label={t("a11y.exportXlsx")} title={t("a11y.exportXlsx")}>
             <Icon name="xlsx" />
-            <span>XLSX</span>
+            <span>{t("action.xlsx")}</span>
           </button>
-          <button type="button" className="secondary save-run-button" onClick={() => void saveRun()} disabled={suggestions.length === 0 || saveStatus === "saving"} aria-label="Save run" title="Save run">
-            <span>{saveStatus === "saving" ? "Saving" : "Save"}</span>
+          <button type="button" className="secondary save-run-button" onClick={() => void saveRun()} disabled={suggestions.length === 0 || saveStatus === "saving"} aria-label={t("a11y.saveRun")} title={t("a11y.saveRun")}>
+            <span>{saveStatus === "saving" ? t("action.saving") : t("action.save")}</span>
           </button>
         </div>
       </div>
@@ -717,16 +755,16 @@ export function KeywordRadarPanel({ adapter }: { adapter: MarketplaceAdapter }) 
 
       {suggestions.length === 0 ? (
         <p className="empty">
-          {status === "done" ? "No matching autocomplete suggestions were found for this run." : "Enter a seed keyword and collect autocomplete suggestions."}
+          {status === "done" ? t("empty.done") : t("empty.idle")}
         </p>
       ) : (
         <div className="table-wrap">
           <table>
             <thead>
               <tr>
-                <th>Keyword</th>
-                <th>Hits</th>
-                <th>Score</th>
+                <th>{t("table.keyword")}</th>
+                <th>{t("table.hits")}</th>
+                <th>{t("table.score")}</th>
               </tr>
             </thead>
             <tbody>
@@ -738,7 +776,7 @@ export function KeywordRadarPanel({ adapter }: { adapter: MarketplaceAdapter }) 
                         <strong>{suggestion.keyword}</strong>
                         <small>{suggestion.normalizedKeyword} | best #{suggestion.bestPosition ?? suggestion.position}</small>
                       </div>
-                      <button type="button" className="row-action" onClick={() => void copyKeyword(suggestion.keyword)} aria-label={`Copy ${suggestion.keyword}`} title="Copy keyword">
+                      <button type="button" className="row-action" onClick={() => void copyKeyword(suggestion.keyword)} aria-label={t("a11y.copyKeyword", { keyword: suggestion.keyword })} title={t("a11y.copyKeywordTitle")}>
                         <Icon name="copy" />
                       </button>
                     </div>
@@ -757,28 +795,28 @@ export function KeywordRadarPanel({ adapter }: { adapter: MarketplaceAdapter }) 
       )}
 
       <div className="analysis-panel">
-        <button type="button" className="analysis-resize-handle" onPointerDown={startAnalysisResize} aria-label="Resize analysis area" />
-        <div className="analysis-tabs" role="tablist" aria-label="Keyword analysis">
+        <button type="button" className="analysis-resize-handle" onPointerDown={startAnalysisResize} aria-label={t("a11y.resizeAnalysis")} />
+        <div className="analysis-tabs" role="tablist" aria-label={t("a11y.analysis")}>
           <button type="button" className={activeAnalysisTab === "words" ? "active" : ""} onClick={() => setActiveAnalysisTab("words")} role="tab" aria-selected={activeAnalysisTab === "words"}>
-            Words
+            {t("tab.words")}
           </button>
           <button type="button" className={activeAnalysisTab === "coverage" ? "active" : ""} onClick={() => setActiveAnalysisTab("coverage")} role="tab" aria-selected={activeAnalysisTab === "coverage"}>
-            Coverage
+            {t("tab.coverage")}
           </button>
           <button type="button" className={activeAnalysisTab === "actions" ? "active" : ""} onClick={() => setActiveAnalysisTab("actions")} role="tab" aria-selected={activeAnalysisTab === "actions"}>
-            Actions
+            {t("tab.actions")}
           </button>
           <button type="button" className={activeAnalysisTab === "gap" ? "active" : ""} onClick={() => setActiveAnalysisTab("gap")} role="tab" aria-selected={activeAnalysisTab === "gap"}>
-            Listing Gap
+            {t("tab.gap")}
           </button>
         </div>
         <div className="analysis-list" style={{ "--analysis-height": `${analysisHeight ?? defaultAnalysisHeight}px` } as React.CSSProperties} role="tabpanel">
           {activeAnalysisTab === "words" ? (
-            wordFrequency.length ? wordFrequency.map((item) => <p key={item.word}>{item.word}: {item.count}</p>) : <p>No words yet</p>
+            wordFrequency.length ? wordFrequency.map((item) => <p key={item.word}>{item.word}: {item.count}</p>) : <p>{t("empty.words")}</p>
           ) : activeAnalysisTab === "coverage" ? coverage.length ? (
             coverage.map((item) => <p key={item.normalizedKeyword}>{item.normalizedKeyword}: {item.marketplaces.join(", ")}</p>)
           ) : (
-            <p>No coverage yet</p>
+            <p>{t("empty.coverage")}</p>
           ) : activeAnalysisTab === "actions" ? salesActions.length ? (
             salesActions.map((action) => (
               <p key={action.title}>
@@ -787,13 +825,13 @@ export function KeywordRadarPanel({ adapter }: { adapter: MarketplaceAdapter }) 
               </p>
             ))
           ) : (
-            <p>No actions yet</p>
+            <p>{t("empty.actions")}</p>
           ) : (
             <div className="listing-gap-form">
-              <input value={listingTitle} onChange={(event) => setListingTitle(event.target.value)} placeholder="Product title" aria-label="Listing title" />
-              <textarea value={listingDescription} onChange={(event) => setListingDescription(event.target.value)} placeholder="Description or bullet points" aria-label="Listing description" />
+              <input value={listingTitle} onChange={(event) => setListingTitle(event.target.value)} placeholder={t("gap.titlePlaceholder")} aria-label={t("a11y.listingTitle")} />
+              <textarea value={listingDescription} onChange={(event) => setListingDescription(event.target.value)} placeholder={t("gap.descPlaceholder")} aria-label={t("a11y.listingDesc")} />
               <button type="button" onClick={analyzeCurrentListingGap} disabled={suggestions.length === 0}>
-                Analyze
+                {t("action.analyze")}
               </button>
               {listingGapAnalysis ? (
                 <div className="listing-gap-results">
@@ -805,17 +843,17 @@ export function KeywordRadarPanel({ adapter }: { adapter: MarketplaceAdapter }) 
                       </p>
                     ))
                   ) : (
-                    <p>No high-value gaps found</p>
+                    <p>{t("gap.noGaps")}</p>
                   )}
                 </div>
               ) : (
-                <p>Analyze collected keywords against listing copy.</p>
+                <p>{t("gap.hint")}</p>
               )}
             </div>
           )}
         </div>
       </div>
-      <button type="button" className="panel-resize-handle" onPointerDown={startPanelResize} aria-label="Resize Keyword Radar panel" />
+      <button type="button" className="panel-resize-handle" onPointerDown={startPanelResize} aria-label={t("a11y.resizePanel")} />
     </section>
   );
 }

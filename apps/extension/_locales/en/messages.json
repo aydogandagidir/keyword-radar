@@ -1,0 +1,11 @@
+{
+  "extName": {
+    "message": "Bluedev Marketplace Keyword Radar"
+  },
+  "extDescription": {
+    "message": "Collect user-initiated autocomplete keyword suggestions from Turkish marketplace search pages."
+  },
+  "extActionTitle": {
+    "message": "Toggle Keyword Radar"
+  }
+}

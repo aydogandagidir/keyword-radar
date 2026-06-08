@@ -1,0 +1,11 @@
+{
+  "extName": {
+    "message": "Bluedev Pazaryeri Keyword Radar"
+  },
+  "extDescription": {
+    "message": "Türk pazaryeri arama sayfalarından kullanıcı tetiklemeli otomatik tamamlama önerilerini toplayın."
+  },
+  "extActionTitle": {
+    "message": "Keyword Radar'ı aç/kapat"
+  }
+}
