@@ -37,6 +37,7 @@
   "scripts": {
     "build": "pnpm -r --sort build",
     "icons": "node scripts/generate-icons.mjs",
+    "assets": "node scripts/generate-store-assets.mjs",
     "dev:extension": "pnpm --filter @bluedev/extension dev",
     "dev:web": "pnpm --filter @bluedev/web dev",
     "test": "vitest run",

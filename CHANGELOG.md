@@ -10,6 +10,8 @@ Chrome Web Store ilk gönderimine hazırlık. Henüz mağazada yayınlanmadı.
 ### ✨ Eklendi
 - İki dilli dökümantasyon: `README.md` (TR) + `README.en.md` (EN), `LICENSE` (Proprietary, EN+TR), kök `PRIVACY.md`, bu `CHANGELOG.md`.
 - **İki dilli arayüz (i18n):** manifest `_locales` (EN/TR ad/açıklama, `__MSG_*__`) + panelde runtime **Auto / EN / TR** dil seçici (TS sözlük + `t()`, tercih `chrome.storage`'da). _Not: üretilen satış ipuçları ve skor tooltip'i sonraki turda çevrilecek; desen hazır._
+- **CWS başvuru dökümanları:** `docs/store-listing-{en,tr}.md`, `docs/permission-justifications.md` (TR+EN), `docs/CWS-SUBMISSION-CHECKLIST.md`.
+- **Mağaza varlıkları + landing:** promo tile'lar (440×280 / 920×680 / 1400×560) + 1280×800 panel mockup ekran görüntüleri (EN/TR), Playwright ile üretilir (`pnpm assets`); iki dilli landing page (`landing/`, Vercel, Open Graph, gizlilik sayfası).
 - Eklenti ikon seti (Figma'da tasarlanan radar logosu → 16/32/48/128 PNG).
 - ESLint 9 (flat) + Prettier; GitHub Actions CI (typecheck → lint → test → build).
 - Chrome Web Store yayınlama için yerel MCP sunucusu (`tools/cws-publish-mcp`).
