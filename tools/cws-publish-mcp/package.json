@@ -1,0 +1,22 @@
+{
+  "name": "cws-publish-mcp-server",
+  "version": "1.0.0",
+  "description": "Local MCP server to upload and publish the extension to the Chrome Web Store.",
+  "private": true,
+  "type": "module",
+  "main": "index.mjs",
+  "bin": {
+    "cws-publish-mcp": "index.mjs"
+  },
+  "scripts": {
+    "start": "node index.mjs",
+    "selftest": "node selftest.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.6.1",
+    "zod": "^3.23.8"
+  }
+}
