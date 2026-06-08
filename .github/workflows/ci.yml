@@ -26,6 +26,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # Build first: workspace packages resolve each other through their built
+      # dist/.d.ts outputs, so typecheck and test must run against built packages.
+      - name: Build (packages + extension + web)
+        run: pnpm build
+
       - name: Typecheck
         run: pnpm typecheck
 
@@ -34,9 +39,6 @@ jobs:
 
       - name: Test
         run: pnpm test
-
-      - name: Build (packages + extension + web)
-        run: pnpm build
 
   # NOTE: Two release gates are intentionally NOT in CI yet:
   #  - E2E (pnpm test:e2e) drives live marketplace sites and is flaky for CI.
