@@ -14,6 +14,7 @@ Chrome Web Store ilk gönderimine hazırlık. Henüz mağazada yayınlanmadı.
 - **Mağaza varlıkları + landing:** promo tile'lar (440×280 / 920×680 / 1400×560) + 1280×800 panel mockup ekran görüntüleri (EN/TR), Playwright ile üretilir (`pnpm assets`); iki dilli landing page (`landing/`, Vercel, Open Graph, gizlilik sayfası).
 - **World-class XLSX raporu:** markalı **Summary** sayfası — metrik kartları + hücre-içi **veri çubuğu (data bar) "grafik" tabloları** (Top Fırsatlar, skor dağılımı, pazaryeri kırılımı, en sık kelimeler) — ve **Keywords** sayfasında skor ısı-haritası (renk skalası) + Opportunity data bar. `xlsx-entry` artık `@bluedev/export`'u kullanıyor (tek builder, DRY).
 - **Panel tooltip'leri:** Save butonu ve Words / Coverage / Actions / Listing Gap sekmelerine hover açıklamaları (TR/EN, `chrome.i18n` sözlüğü).
+- **Hepsiburada desteği:** Hepsiburada, dördüncü pazaryeri olarak CWS kapsamına eklendi — manifest host izinleri + `cwsMarketplaceAdapters` + kapsam guard'ları (test + paketleme script'i) güncellendi.
 - Eklenti ikon seti (Figma'da tasarlanan radar logosu → 16/32/48/128 PNG).
 - ESLint 9 (flat) + Prettier; GitHub Actions CI (typecheck → lint → test → build).
 - Chrome Web Store yayınlama için yerel MCP sunucusu (`tools/cws-publish-mcp`).

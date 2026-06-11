@@ -33,6 +33,7 @@ Bu veriler yalnızca sizin tarayıcınızın `chrome.storage.local` alanında (k
 - `https://amazon.com.tr/*`, `https://www.amazon.com.tr/*`
 - `https://trendyol.com/*`, `https://www.trendyol.com/*`
 - `https://n11.com/*`, `https://www.n11.com/*`
+- `https://hepsiburada.com/*`, `https://www.hepsiburada.com/*`
 
 Başka hiçbir alan adına erişim yoktur. Toplanan veriler cihazınızdan ayrılmaz.
 
@@ -60,7 +61,7 @@ Eklenti yalnızca herkese açık öneri metinlerini işlediğinden kişisel veri
 
 ## 7. Pazaryeri / Marka İlişkisi
 
-Bu eklenti; **Amazon, Trendyol veya n11'in resmi ürünü değildir**, onlarla ilişkili, onlar tarafından desteklenen veya sponsorluğu yapılan bir yazılım değildir. "Amazon", "Trendyol" ve "n11" ilgili sahiplerinin tescilli markalarıdır. Eklenti, kullanıcının kendi tarayıcısındaki pazaryeri arama sayfasında çalışır.
+Bu eklenti; **Amazon, Trendyol, Hepsiburada veya n11'in resmi ürünü değildir**, onlarla ilişkili, onlar tarafından desteklenen veya sponsorluğu yapılan bir yazılım değildir. "Amazon", "Trendyol", "Hepsiburada" ve "n11" ilgili sahiplerinin tescilli markalarıdır. Eklenti, kullanıcının kendi tarayıcısındaki pazaryeri arama sayfasında çalışır.
 
 ## 8. İletişim
 
@@ -68,4 +69,4 @@ Bu metin veya eklenti hakkında soru ve görüşleriniz için: [bluedev.dev](htt
 
 ---
 
-**English summary**: Keyword Radar processes only the **visible autocomplete suggestions** shown on supported marketplace search pages (Amazon.com.tr, Trendyol, n11), **locally on your device**. It makes **no external HTTP requests** — no servers, no analytics, no telemetry — and `host_permissions` are limited to those three marketplaces. It never accesses seller-panel, account, order, customer, or payment data. Saved runs live in `chrome.storage.local`; permissions are limited to `activeTab` and `storage`. Collection runs only when you click "Collect". You are responsible for complying with each marketplace's terms of service. Not affiliated with Amazon, Trendyol, or n11.
+**English summary**: Keyword Radar processes only the **visible autocomplete suggestions** shown on supported marketplace search pages (Amazon.com.tr, Trendyol, Hepsiburada, n11), **locally on your device**. It makes **no external HTTP requests** — no servers, no analytics, no telemetry — and `host_permissions` are limited to those three marketplaces. It never accesses seller-panel, account, order, customer, or payment data. Saved runs live in `chrome.storage.local`; permissions are limited to `activeTab` and `storage`. Collection runs only when you click "Collect". You are responsible for complying with each marketplace's terms of service. Not affiliated with Amazon, Trendyol, Hepsiburada, or n11.

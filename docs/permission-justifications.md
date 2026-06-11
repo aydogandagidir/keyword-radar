@@ -15,11 +15,11 @@ Each entry is provided in English and Turkish.
 
 **TR:** Kullanıcının kendi tercihlerini ve sonuçlarını `chrome.storage.local` ile yerel olarak saklamak için kullanılır: panel boyutu/konumu, daraltılmış durum, hız profili, dil tercihi, Listing-Gap form metni ve kaydedilen kelime çalışmaları. Cihaz dışına hiçbir şey gönderilmez.
 
-## Host permissions — `amazon.com.tr`, `trendyol.com`, `n11.com`
+## Host permissions — `amazon.com.tr`, `trendyol.com`, `hepsiburada.com`, `n11.com`
 
-**EN:** Required so the content script can run on these three marketplace search pages to (a) show the panel and (b) read the VISIBLE autocomplete suggestions the page renders. These are the extension's only supported sites; no broad host access (no `<all_urls>`) is requested.
+**EN:** Required so the content script can run on these four marketplace search pages to (a) show the panel and (b) read the VISIBLE autocomplete suggestions the page renders. These are the extension's only supported sites; no broad host access (no `<all_urls>`) is requested.
 
-**TR:** İçerik betiğinin bu üç pazaryeri arama sayfasında çalışıp (a) paneli göstermesi ve (b) sayfanın oluşturduğu GÖRÜNÜR otomatik tamamlama önerilerini okuması için gereklidir. Bunlar eklentinin desteklediği tek sitelerdir; geniş host erişimi (`<all_urls>`) istenmez.
+**TR:** İçerik betiğinin bu dört pazaryeri arama sayfasında çalışıp (a) paneli göstermesi ve (b) sayfanın oluşturduğu GÖRÜNÜR otomatik tamamlama önerilerini okuması için gereklidir. Bunlar eklentinin desteklediği tek sitelerdir; geniş host erişimi (`<all_urls>`) istenmez.
 
 ## What is NOT requested
 

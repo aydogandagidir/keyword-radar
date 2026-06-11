@@ -59,10 +59,10 @@ structured keyword set you can act on:
 | Amazon Türkiye | `amazon.com.tr` | ✅ Shipping (first release scope) |
 | Trendyol | `trendyol.com` | ✅ Shipping (first release scope) |
 | n11 | `n11.com` | ✅ Shipping (first release scope) |
-| Hepsiburada | `hepsiburada.com` | 🧪 In codebase, gated until autocomplete is reliable |
+| Hepsiburada | `hepsiburada.com` | ✅ Shipping (first release scope) |
 | Global (Amazon, eBay, Etsy, AliExpress, …) | — | 🧪 Generic adapters, not in the CWS manifest yet |
 
-> The published Chrome Web Store package is intentionally narrow: only the three Turkish
+> The published Chrome Web Store package is intentionally narrow: only the four Turkish
 > marketplaces above are requested in `host_permissions`. A build-time check
 > (`scripts/package-extension.ps1`) and a unit test (`tests/manifest.test.ts`) fail the
 > release if anything outside that scope leaks into the manifest.
@@ -102,7 +102,7 @@ pnpm test         # (optional) run the test suite
 2. Open `chrome://extensions`.
 3. Enable **Developer mode** (top-right).
 4. Click **Load unpacked** and select `apps/extension/dist`.
-5. Open Amazon.com.tr, Trendyol, or n11 and click the toolbar icon to toggle the panel.
+5. Open Amazon.com.tr, Trendyol, Hepsiburada, or n11 and click the toolbar icon to toggle the panel.
 
 **Package for the Chrome Web Store** (Windows / PowerShell):
 
@@ -210,7 +210,7 @@ This is a proprietary project, but issues and suggestions are welcome
 ## License
 
 **Proprietary.** © 2026 Bluedev — all rights reserved. See [`LICENSE`](LICENSE) (bilingual
-EN/TR). Not affiliated with Amazon, Trendyol, or n11; trademarks belong to their respective
+EN/TR). Not affiliated with Amazon, Trendyol, Hepsiburada, or n11; trademarks belong to their respective
 owners. For commercial licensing or partnerships, contact **bluedev.dev**.
 
 ---

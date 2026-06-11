@@ -19,11 +19,11 @@ describe("marketplace adapters", () => {
     expect(getAdapterForUrl("https://example.com")).toBeUndefined();
   });
 
-  it("limits Chrome Web Store routing to the first Turkish marketplace release scope", () => {
+  it("limits Chrome Web Store routing to the Turkish marketplace release scope", () => {
     expect(getCwsAdapterForUrl("https://www.amazon.com.tr/s?k=kulaklik")?.id).toBe("amazon-tr");
     expect(getCwsAdapterForUrl("https://www.trendyol.com/sr?q=elbise")?.id).toBe("trendyol");
     expect(getCwsAdapterForUrl("https://www.n11.com/arama?q=kitap")?.id).toBe("n11");
-    expect(getCwsAdapterForUrl("https://www.hepsiburada.com/ara?q=telefon")).toBeUndefined();
+    expect(getCwsAdapterForUrl("https://www.hepsiburada.com/ara?q=telefon")?.id).toBe("hepsiburada");
     expect(getCwsAdapterForUrl("https://www.amazon.com/s?k=headphones")).toBeUndefined();
     expect(getCwsAdapterForUrl("https://www.alibaba.com/trade/search?SearchText=bag")).toBeUndefined();
   });

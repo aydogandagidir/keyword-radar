@@ -11,7 +11,7 @@ Keyword Radar — Pazaryeri Kelime Aracı
 ## Kısa açıklama (en fazla 132 karakter)
 
 ```
-Amazon.com.tr, Trendyol ve n11 önerilerini toplayın; skorlayıp karşılaştırın ve CSV/XLSX olarak dışa aktarın.
+Amazon.com.tr, Trendyol, Hepsiburada ve n11 önerilerini toplayın; skorlayıp karşılaştırın ve CSV/XLSX dışa aktarın.
 ```
 
 ## Kategori
@@ -23,7 +23,7 @@ Verimlilik (Productivity)
 ```
 Keyword Radar, Türk pazaryeri arama sayfalarındaki otomatik tamamlama listelerini üzerinde aksiyon alabileceğiniz yapısal bir kelime listesine dönüştürür. Tek bir tohum kelime yazın; eklenti bunu çok sayıda probe'a genişletir, her pazaryerinin GÖRÜNÜR önerilerini okur, sonra normalize eder, skorlar ve dışa aktarır — böylece listelerinizi gerçek alıcı talebine göre yazarsınız.
 
-Amazon.com.tr, Trendyol ve n11'de çalışır.
+Amazon.com.tr, Trendyol, Hepsiburada ve n11'de çalışır.
 
 NE YAPAR
 • Tohum genişletme — orijinal, sonek A–Z, önek A–Z ve sonek 0–9 modları.
@@ -37,7 +37,7 @@ NE YAPAR
 • İki dilli arayüz — Türkçe / English, Otomatik seçenekle.
 
 NASIL KULLANILIR
-1. Amazon.com.tr, Trendyol veya n11'i açın.
+1. Amazon.com.tr, Trendyol, Hepsiburada veya n11'i açın.
 2. Yüzen paneli açmak için Keyword Radar araç çubuğu ikonuna tıklayın.
 3. Bir tohum kelime yazın; genişletme modlarını + hız profilini seçin.
 4. Topla'ya basın ve önerileri canlı skorlarıyla izleyin.
@@ -47,7 +47,7 @@ NASIL KULLANILIR
 GİZLİLİK
 • Hesap yok, giriş yok, kayıt yok.
 • Harici sunucu, analitik veya telemetri yok — hiçbir şey cihazınızdan çıkmaz.
-• İzinler yalnızca activeTab ve storage; host erişimi yalnızca yukarıdaki üç pazaryeri.
+• İzinler yalnızca activeTab ve storage; host erişimi yalnızca dört pazaryeri.
 • Yalnızca alıcının zaten gördüğü otomatik tamamlama metnini işler. Satıcı paneli, hesap, sipariş, müşteri veya ödeme verisi okumaz.
 • Toplama yalnızca Topla'ya bastığınızda çalışır — arka planda tarama yok.
 
@@ -59,11 +59,11 @@ DESTEK
 Soru ve görüşler: bluedev.dev
 
 YASAL
-Keyword Radar, Bluedev'in bağımsız bir aracıdır. Amazon, Trendyol veya n11 ile ilişkili, onlar tarafından desteklenen veya sponsorluğu yapılan bir yazılım değildir. "Amazon", "Trendyol" ve "n11" ilgili sahiplerinin tescilli markalarıdır. Eklentiyi her pazaryerinin hizmet şartlarına uygun kullanmak sizin sorumluluğunuzdadır.
+Keyword Radar, Bluedev'in bağımsız bir aracıdır. Amazon, Trendyol, Hepsiburada veya n11 ile ilişkili, onlar tarafından desteklenen veya sponsorluğu yapılan bir yazılım değildir. "Amazon", "Trendyol", "Hepsiburada" ve "n11" ilgili sahiplerinin tescilli markalarıdır. Eklentiyi her pazaryerinin hizmet şartlarına uygun kullanmak sizin sorumluluğunuzdadır.
 ```
 
 ## Tek amaç (CWS "Single purpose" alanı için)
 
 ```
-Keyword Radar, kullanıcının desteklenen Türk pazaryeri arama sayfalarında (Amazon.com.tr, Trendyol, n11) görünen otomatik tamamlama önerilerini toplamasını ve bunları kelime araştırması için yerel olarak normalize edip skorlamasını, karşılaştırmasını ve CSV/XLSX olarak dışa aktarmasını sağlar. Tüm işlem kullanıcının cihazında gerçekleşir; Bluedev'e veya üçüncü taraflara hiçbir veri gönderilmez.
+Keyword Radar, kullanıcının desteklenen Türk pazaryeri arama sayfalarında (Amazon.com.tr, Trendyol, Hepsiburada, n11) görünen otomatik tamamlama önerilerini toplamasını ve bunları kelime araştırması için yerel olarak normalize edip skorlamasını, karşılaştırmasını ve CSV/XLSX olarak dışa aktarmasını sağlar. Tüm işlem kullanıcının cihazında gerçekleşir; Bluedev'e veya üçüncü taraflara hiçbir veri gönderilmez.
 ```

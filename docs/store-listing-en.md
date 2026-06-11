@@ -11,7 +11,7 @@ Keyword Radar — Marketplace Keyword Tool
 ## Short description (max 132 chars)
 
 ```
-Collect autocomplete keyword suggestions from Amazon.com.tr, Trendyol and n11 — score, compare and export them as CSV/XLSX.
+Collect autocomplete suggestions from Amazon.com.tr, Trendyol, Hepsiburada and n11 — score, compare and export as CSV/XLSX.
 ```
 
 ## Category
@@ -23,7 +23,7 @@ Productivity
 ```
 Keyword Radar turns the autocomplete dropdowns on Turkish marketplace search pages into a structured keyword list you can act on. Type one seed keyword and the extension expands it into many probes, reads the VISIBLE suggestions each marketplace shows, then normalizes, scores and exports them — so you can write listings around real shopper demand.
 
-Works on Amazon.com.tr, Trendyol and n11.
+Works on Amazon.com.tr, Trendyol, Hepsiburada and n11.
 
 WHAT IT DOES
 • Seed expansion — original, suffix A–Z, prefix A–Z and suffix 0–9 probe modes.
@@ -37,7 +37,7 @@ WHAT IT DOES
 • Bilingual UI — English / Türkçe, with an Auto option.
 
 HOW TO USE
-1. Open Amazon.com.tr, Trendyol or n11.
+1. Open Amazon.com.tr, Trendyol, Hepsiburada or n11.
 2. Click the Keyword Radar toolbar icon to open the floating panel.
 3. Type a seed keyword and pick expansion modes + a speed profile.
 4. Press Collect and watch suggestions stream in with live scores.
@@ -47,7 +47,7 @@ HOW TO USE
 PRIVACY
 • No account, no login, no sign-up.
 • No external servers, analytics or telemetry — nothing leaves your device.
-• Permissions are limited to activeTab and storage; host access is limited to the three marketplaces above.
+• Permissions are limited to activeTab and storage; host access is limited to the four marketplaces above.
 • It processes only the autocomplete text a shopper would already see. It never reads seller-panel, account, order, customer or payment data.
 • Collection runs only when you click Collect — no background crawling.
 
@@ -59,13 +59,13 @@ SUPPORT
 Questions or feedback: bluedev.dev
 
 LEGAL
-Keyword Radar is an independent tool by Bluedev. It is not affiliated with, endorsed by or sponsored by Amazon, Trendyol or n11. "Amazon", "Trendyol" and "n11" are trademarks of their respective owners. You are responsible for using the extension in line with each marketplace's terms of service.
+Keyword Radar is an independent tool by Bluedev. It is not affiliated with, endorsed by or sponsored by Amazon, Trendyol, Hepsiburada or n11. "Amazon", "Trendyol", "Hepsiburada" and "n11" are trademarks of their respective owners. You are responsible for using the extension in line with each marketplace's terms of service.
 ```
 
 ## Single purpose (for the CWS "Single purpose" field)
 
 ```
-Keyword Radar lets a user collect the visible autocomplete keyword suggestions shown on supported Turkish marketplace search pages (Amazon.com.tr, Trendyol, n11), and locally normalize, score, compare and export them as CSV/XLSX for keyword research. All processing happens on the user's device; no data is transmitted to Bluedev or any third party.
+Keyword Radar lets a user collect the visible autocomplete keyword suggestions shown on supported Turkish marketplace search pages (Amazon.com.tr, Trendyol, Hepsiburada, n11), and locally normalize, score, compare and export them as CSV/XLSX for keyword research. All processing happens on the user's device; no data is transmitted to Bluedev or any third party.
 ```
 
 ## Backup titles (if a trademark concern is raised)

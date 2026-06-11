@@ -30,6 +30,7 @@ export const marketplaceAdapters: MarketplaceAdapter[] = [
 export const cwsMarketplaceAdapters: MarketplaceAdapter[] = [
   amazonTrAdapter,
   trendyolAdapter,
+  hepsiburadaAdapter,
   n11Adapter
 ];
 

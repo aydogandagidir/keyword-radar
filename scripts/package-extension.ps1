@@ -19,7 +19,9 @@ $allowedHostMatches = @(
   "https://trendyol.com/*",
   "https://www.trendyol.com/*",
   "https://n11.com/*",
-  "https://www.n11.com/*"
+  "https://www.n11.com/*",
+  "https://hepsiburada.com/*",
+  "https://www.hepsiburada.com/*"
 )
 
 $forbiddenFragments = @(
@@ -29,7 +31,6 @@ $forbiddenFragments = @(
   "https://www.amazon.fr/*",
   "https://www.amazon.it/*",
   "https://www.amazon.es/*",
-  "hepsiburada",
   "alibaba",
   "aliexpress",
   "ebay",

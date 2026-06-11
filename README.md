@@ -6,7 +6,7 @@
 
 **Türk pazaryeri alıcılarının gerçekte ne aradığını keşfedin.**
 
-Amazon.com.tr, Trendyol ve n11 arama kutularındaki kullanıcı tetiklemeli **otomatik tamamlama
+Amazon.com.tr, Trendyol, Hepsiburada ve n11 arama kutularındaki kullanıcı tetiklemeli **otomatik tamamlama
 önerilerini** toplayan, gizlilik-öncelikli bir **Manifest V3 Chrome eklentisi** — sonra bunları
 normalize eder, skorlar ve dışa aktarır; böylece satıcılar listelerini **gerçek talebe** göre yazar.
 
@@ -58,10 +58,10 @@ sinyali, üzerinde aksiyon alabileceğiniz yapısal bir keyword setine dönüşt
 | Amazon Türkiye | `amazon.com.tr` | ✅ Yayında (ilk sürüm kapsamı) |
 | Trendyol | `trendyol.com` | ✅ Yayında (ilk sürüm kapsamı) |
 | n11 | `n11.com` | ✅ Yayında (ilk sürüm kapsamı) |
-| Hepsiburada | `hepsiburada.com` | 🧪 Kodda var, autocomplete güvenilir olana dek gated |
+| Hepsiburada | `hepsiburada.com` | ✅ Yayında (ilk sürüm kapsamı) |
 | Global (Amazon, eBay, Etsy, AliExpress, …) | — | 🧪 Genel adaptörler, henüz CWS manifestinde değil |
 
-> Yayınlanan Chrome Web Store paketi bilerek dardır: `host_permissions`'ta yalnızca yukarıdaki üç
+> Yayınlanan Chrome Web Store paketi bilerek dardır: `host_permissions`'ta yalnızca yukarıdaki dört
 > Türk pazaryeri istenir. Bir build-time kontrol (`scripts/package-extension.ps1`) ve bir birim
 > test (`tests/manifest.test.ts`), bu kapsamın dışında bir şey manifeste sızarsa sürümü
 > başarısız kılar.
@@ -101,7 +101,7 @@ pnpm test         # (opsiyonel) test paketini çalıştır
 2. `chrome://extensions` adresini açın.
 3. **Geliştirici modu**nu açın (sağ üst).
 4. **Paketlenmemiş öğe yükle**'ye tıklayın ve `apps/extension/dist` klasörünü seçin.
-5. Amazon.com.tr, Trendyol veya n11'i açın ve paneli açıp kapatmak için araç çubuğu ikonuna tıklayın.
+5. Amazon.com.tr, Trendyol, Hepsiburada veya n11'i açın ve paneli açıp kapatmak için araç çubuğu ikonuna tıklayın.
 
 **Chrome Web Store için paketleme** (Windows / PowerShell):
 
@@ -209,7 +209,7 @@ Bu özel (proprietary) bir projedir, ancak issue ve öneriler memnuniyetle karş
 ## Lisans
 
 **Özel (Proprietary).** © 2026 Bluedev — tüm hakları saklıdır. Bkz. [`LICENSE`](LICENSE) (iki
-dilli EN/TR). Amazon, Trendyol veya n11 ile ilişkili değildir; markalar ilgili sahiplerine
+dilli EN/TR). Amazon, Trendyol, Hepsiburada veya n11 ile ilişkili değildir; markalar ilgili sahiplerine
 aittir. Ticari lisanslama veya ortaklık için: **bluedev.dev**.
 
 ---

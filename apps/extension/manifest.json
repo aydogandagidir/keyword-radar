@@ -17,7 +17,9 @@
     "https://trendyol.com/*",
     "https://www.trendyol.com/*",
     "https://n11.com/*",
-    "https://www.n11.com/*"
+    "https://www.n11.com/*",
+    "https://hepsiburada.com/*",
+    "https://www.hepsiburada.com/*"
   ],
   "background": {
     "service_worker": "assets/background.js",
@@ -31,7 +33,9 @@
         "https://trendyol.com/*",
         "https://www.trendyol.com/*",
         "https://n11.com/*",
-        "https://www.n11.com/*"
+        "https://www.n11.com/*",
+        "https://hepsiburada.com/*",
+        "https://www.hepsiburada.com/*"
       ],
       "js": ["assets/content.js"],
       "run_at": "document_idle"
@@ -52,7 +56,9 @@
         "https://trendyol.com/*",
         "https://www.trendyol.com/*",
         "https://n11.com/*",
-        "https://www.n11.com/*"
+        "https://www.n11.com/*",
+        "https://hepsiburada.com/*",
+        "https://www.hepsiburada.com/*"
       ]
     }
   ],
