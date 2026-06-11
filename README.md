@@ -176,7 +176,7 @@ Sürekli entegrasyon (CI) her push ve pull request'te `build → typecheck → l
 ## Gizlilik & izinler
 
 - **İzinler:** yalnızca `activeTab` ve `storage`.
-- **Host izinleri:** yalnızca `amazon.com.tr`, `trendyol.com` ve `n11.com`.
+- **Host izinleri:** yalnızca `amazon.com.tr`, `trendyol.com`, `hepsiburada.com` ve `n11.com`.
 - **Hiçbir** harici HTTP isteği yok — sunucu, analitik veya telemetri yok.
 - **Hiçbir** hesap bağlantısı, kimlik bilgisi, sipariş, müşteri veya ödeme verisi yok.
 - **Hiçbir** arka plan taraması yok — toplama yalnızca **Topla**'ya bastığınızda çalışır.
@@ -187,12 +187,12 @@ Bkz. [`PRIVACY.md`](PRIVACY.md) ve [`docs/10-permissions.md`](docs/10-permission
 ## Yol haritası
 
 - [x] Çekirdek motor: genişletme, Türkçe normalizasyon, tekilleştirme, skorlama
-- [x] Amazon.com.tr · Trendyol · n11 adaptörleri
+- [x] Amazon.com.tr · Trendyol · Hepsiburada · n11 adaptörleri
 - [x] CSV / XLSX dışa aktarma, kayıtlı çalışmalar, listing-gap analizi
 - [x] Eklenti ikonları, ESLint/Prettier, CI hattı, CWS-publish MCP
 - [ ] Chrome Web Store listeleme varlıkları & gönderim
 - [ ] `_locales` ile tam iki dilli (TR/EN) arayüz
-- [ ] Hepsiburada & global pazaryeri adaptörleri
+- [ ] Global pazaryeri adaptörleri (Amazon global, eBay, Etsy, AliExpress)
 - [ ] AI keyword kümeleme & listing önerileri (arayüzler hazır)
 
 ## Teknoloji yığını

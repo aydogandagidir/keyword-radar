@@ -177,7 +177,7 @@ Continuous integration runs `build → typecheck → lint → test` on every pus
 ## Privacy & permissions
 
 - **Permissions:** only `activeTab` and `storage`.
-- **Host permissions:** limited to `amazon.com.tr`, `trendyol.com`, and `n11.com`.
+- **Host permissions:** limited to `amazon.com.tr`, `trendyol.com`, `hepsiburada.com`, and `n11.com`.
 - **No** external HTTP requests — no servers, analytics, or telemetry.
 - **No** account connection, credentials, orders, customer, or payment data.
 - **No** background crawling — collection only runs when you click **Collect**.
@@ -188,12 +188,12 @@ See [`PRIVACY.md`](PRIVACY.md) and [`docs/10-permissions.md`](docs/10-permission
 ## Roadmap
 
 - [x] Core engine: expansion, Turkish normalization, dedupe, scoring
-- [x] Amazon.com.tr · Trendyol · n11 adapters
+- [x] Amazon.com.tr · Trendyol · Hepsiburada · n11 adapters
 - [x] CSV / XLSX export, saved runs, listing-gap analysis
 - [x] Extension icons, ESLint/Prettier, CI pipeline, CWS-publish MCP
 - [ ] Chrome Web Store listing assets & submission
 - [ ] Full bilingual (TR/EN) UI via `_locales`
-- [ ] Hepsiburada & global marketplace adapters
+- [ ] Global marketplace adapters (Amazon global, eBay, Etsy, AliExpress)
 - [ ] AI keyword clustering & listing suggestions (interfaces already in place)
 
 ## Tech stack
