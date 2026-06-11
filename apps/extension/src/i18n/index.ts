@@ -103,7 +103,34 @@ const en = {
   "notice.collectFirst": "Collect keywords before analyzing a listing.",
   "notice.gapAnalyzed": "Listing gap analyzed",
   "error.noSearchInput": "Search input was not found on this page.",
-  "error.collectionFailed": "Collection failed."
+  "error.collectionFailed": "Collection failed.",
+  // sales actions (Actions tab)
+  "action.titleLead": "Title lead",
+  "action.titleLeadDetail": "Lead with \"{keyword}\" in the product title and first bullet.",
+  "action.longTail": "Long-tail targets",
+  "action.demandSignal": "Demand signal",
+  "action.demandSignalDetail": "\"{keyword}\" appeared {count} times across expansions.",
+  "action.coverage": "Marketplace coverage",
+  "action.coverageDetail": "\"{keyword}\" is visible on {marketplaces}.",
+  "action.searchTerms": "Search terms",
+  "action.aiFit": "AI fit: {level}",
+  "aiFit.high": "High",
+  "aiFit.medium": "Medium",
+  "aiFit.low": "Low",
+  "action.aiFitHigh": "Use AI to cluster intent, draft listing copy, and find missing modifiers.",
+  "action.aiFitMedium": "AI can help after one more collection pass or a second marketplace comparison.",
+  "action.aiFitLow": "Collect more suggestions before relying on AI-generated copy.",
+  // score tooltip
+  "score.none": "No score yet",
+  "score.opportunity": "Opportunity",
+  "score.frequency": "Frequency",
+  "score.longTail": "Long-tail",
+  "score.coverage": "Coverage",
+  "score.confidence": "Confidence",
+  // listing-gap reasons
+  "gap.reasonMissing": "Missing from listing copy. Opportunity {opportunity}, hits {hits}.",
+  "gap.reasonInTitle": "Already in title; keep position strong. Opportunity {opportunity}, hits {hits}.",
+  "gap.reasonInBody": "Present in body but missing from title. Opportunity {opportunity}, hits {hits}."
 } satisfies Record<string, string>;
 
 export type MessageKey = keyof typeof en;
@@ -193,7 +220,31 @@ const tr: Record<MessageKey, string> = {
   "notice.collectFirst": "Bir listeyi analiz etmeden önce kelime toplayın.",
   "notice.gapAnalyzed": "Liste açığı analiz edildi",
   "error.noSearchInput": "Bu sayfada arama kutusu bulunamadı.",
-  "error.collectionFailed": "Toplama başarısız."
+  "error.collectionFailed": "Toplama başarısız.",
+  "action.titleLead": "Başlık önceliği",
+  "action.titleLeadDetail": "Ürün başlığında ve ilk maddede \"{keyword}\" ile başlayın.",
+  "action.longTail": "Uzun-kuyruk hedefler",
+  "action.demandSignal": "Talep sinyali",
+  "action.demandSignalDetail": "\"{keyword}\" genişletmeler boyunca {count} kez göründü.",
+  "action.coverage": "Pazaryeri kapsamı",
+  "action.coverageDetail": "\"{keyword}\" şu pazaryerlerinde görünür: {marketplaces}.",
+  "action.searchTerms": "Arama terimleri",
+  "action.aiFit": "AI uygunluğu: {level}",
+  "aiFit.high": "Yüksek",
+  "aiFit.medium": "Orta",
+  "aiFit.low": "Düşük",
+  "action.aiFitHigh": "Niyeti kümelemek, liste metni yazmak ve eksik niteleyicileri bulmak için AI kullanın.",
+  "action.aiFitMedium": "AI; bir toplama turu daha veya ikinci bir pazaryeri karşılaştırmasından sonra yardımcı olabilir.",
+  "action.aiFitLow": "AI üretimi metne güvenmeden önce daha fazla öneri toplayın.",
+  "score.none": "Henüz skor yok",
+  "score.opportunity": "Fırsat",
+  "score.frequency": "Frekans",
+  "score.longTail": "Uzun-kuyruk",
+  "score.coverage": "Kapsam",
+  "score.confidence": "Güven",
+  "gap.reasonMissing": "Liste metninde eksik. Fırsat {opportunity}, isabet {hits}.",
+  "gap.reasonInTitle": "Başlıkta mevcut; konumu güçlü tutun. Fırsat {opportunity}, isabet {hits}.",
+  "gap.reasonInBody": "Açıklamada var ama başlıkta yok. Fırsat {opportunity}, isabet {hits}."
 };
 
 const dictionaries: Record<Locale, Record<MessageKey, string>> = { en, tr };

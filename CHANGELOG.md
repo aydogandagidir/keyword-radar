@@ -9,12 +9,13 @@ Chrome Web Store ilk gönderimine hazırlık. Henüz mağazada yayınlanmadı.
 
 ### ✨ Eklendi
 - İki dilli dökümantasyon: `README.md` (TR) + `README.en.md` (EN), `LICENSE` (Proprietary, EN+TR), kök `PRIVACY.md`, bu `CHANGELOG.md`.
-- **İki dilli arayüz (i18n):** manifest `_locales` (EN/TR ad/açıklama, `__MSG_*__`) + panelde runtime **Auto / EN / TR** dil seçici (TS sözlük + `t()`, tercih `chrome.storage`'da). _Not: üretilen satış ipuçları ve skor tooltip'i sonraki turda çevrilecek; desen hazır._
+- **İki dilli arayüz (i18n):** manifest `_locales` (EN/TR ad/açıklama, `__MSG_*__`) + panelde runtime **Auto / EN / TR** dil seçici (TS sözlük + `t()`, tercih `chrome.storage`'da). Panel **tamamen** yerelleştirildi: satış aksiyonları, skor tooltip'i, listing-gap gerekçeleri, toast ve hata mesajları dahil.
 - **CWS başvuru dökümanları:** `docs/store-listing-{en,tr}.md`, `docs/permission-justifications.md` (TR+EN), `docs/CWS-SUBMISSION-CHECKLIST.md`.
 - **Mağaza varlıkları + landing:** promo tile'lar (440×280 / 920×680 / 1400×560) + 1280×800 panel mockup ekran görüntüleri (EN/TR), Playwright ile üretilir (`pnpm assets`); iki dilli landing page (`landing/`, Vercel, Open Graph, gizlilik sayfası).
 - **World-class XLSX raporu:** markalı **Summary** sayfası — metrik kartları + hücre-içi **veri çubuğu (data bar) "grafik" tabloları** (Top Fırsatlar, skor dağılımı, pazaryeri kırılımı, en sık kelimeler) — ve **Keywords** sayfasında skor ısı-haritası (renk skalası) + Opportunity data bar. `xlsx-entry` artık `@bluedev/export`'u kullanıyor (tek builder, DRY).
 - **Panel tooltip'leri:** Save butonu ve Words / Coverage / Actions / Listing Gap sekmelerine hover açıklamaları (TR/EN, `chrome.i18n` sözlüğü).
 - **Hepsiburada desteği:** Hepsiburada, dördüncü pazaryeri olarak CWS kapsamına eklendi — manifest host izinleri + `cwsMarketplaceAdapters` + kapsam guard'ları (test + paketleme script'i) güncellendi.
+- **Gerçek mağaza ekran görüntüleri:** mockup yerine — Playwright ile yüklenen **gerçek eklenti** + gerçek "kulaklık" verisiyle 1280×800 görüntüler (TR + EN: toplama, aksiyonlar, listing gap, Hepsiburada); `scripts/capture-screenshots.mjs` ile üretilir. Promo tile'lar dört pazaryerini yansıtacak şekilde güncellendi.
 - Eklenti ikon seti (Figma'da tasarlanan radar logosu → 16/32/48/128 PNG).
 - ESLint 9 (flat) + Prettier; GitHub Actions CI (typecheck → lint → test → build).
 - Chrome Web Store yayınlama için yerel MCP sunucusu (`tools/cws-publish-mcp`).

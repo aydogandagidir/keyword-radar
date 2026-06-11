@@ -8,6 +8,7 @@ import {
   createTranslator,
   type LocalePref,
   type MessageKey,
+  type Translate,
   readLocalePref,
   resolveLocale,
   writeLocalePref
@@ -125,7 +126,7 @@ export function KeywordRadarPanel({ adapter }: { adapter: MarketplaceAdapter }) 
   const t = useMemo(() => createTranslator(resolveLocale(localePref)), [localePref]);
   const wordFrequency = useMemo(() => calculateWordFrequency(suggestions).slice(0, 8), [suggestions]);
   const coverage = useMemo(() => compareMarketplaceCoverage(suggestions).slice(0, 8), [suggestions]);
-  const salesActions = useMemo(() => buildSalesActions(suggestions, seed), [suggestions, seed]);
+  const salesActions = useMemo(() => buildSalesActions(suggestions, seed, t), [suggestions, seed, t]);
   const totalOccurrences = useMemo(() => suggestions.reduce((sum, suggestion) => sum + (suggestion.occurrenceCount ?? 1), 0), [suggestions]);
   const statusLabel =
     status === "collecting"
@@ -240,7 +241,7 @@ export function KeywordRadarPanel({ adapter }: { adapter: MarketplaceAdapter }) 
 
     const input = await waitForSearchInput(adapter);
     if (!input && adapter.id !== "trendyol") {
-      setError("Search input was not found on this page.");
+      setError(t("error.noSearchInput"));
       setStatus("error");
       return;
     }
@@ -284,7 +285,7 @@ export function KeywordRadarPanel({ adapter }: { adapter: MarketplaceAdapter }) 
       setStatus("done");
     } catch (collectionError) {
       if ((collectionError as Error).name !== "AbortError") {
-        setError(collectionError instanceof Error ? collectionError.message : "Collection failed.");
+        setError(collectionError instanceof Error ? collectionError.message : t("error.collectionFailed"));
         setStatus("error");
       }
     } finally {
@@ -309,18 +310,18 @@ export function KeywordRadarPanel({ adapter }: { adapter: MarketplaceAdapter }) 
   async function copyResults() {
     try {
       await writeClipboardText(toPanelCsv(suggestions));
-      showActionNotice("Copied", "success");
+      showActionNotice(t("notice.copied"), "success");
     } catch (copyError) {
-      showActionNotice(copyError instanceof Error ? copyError.message : "Copy failed.", "error");
+      showActionNotice(copyError instanceof Error ? copyError.message : t("notice.copyFailed"), "error");
     }
   }
 
   function exportCsv() {
     try {
       downloadPanelCsv(suggestions);
-      showActionNotice("CSV downloaded", "success");
+      showActionNotice(t("notice.csvDownloaded"), "success");
     } catch (csvError) {
-      showActionNotice(csvError instanceof Error ? csvError.message : "CSV export failed.", "error");
+      showActionNotice(csvError instanceof Error ? csvError.message : t("notice.csvFailed"), "error");
     }
   }
 
@@ -336,9 +337,9 @@ export function KeywordRadarPanel({ adapter }: { adapter: MarketplaceAdapter }) 
         throw new Error("XLSX module was not loaded correctly.");
       }
       await downloadXlsx(suggestions, undefined, listingGapAnalysis ?? undefined);
-      showActionNotice("XLSX downloaded", "success");
+      showActionNotice(t("notice.xlsxDownloaded"), "success");
     } catch (xlsxError) {
-      showActionNotice(xlsxError instanceof Error ? xlsxError.message : "XLSX export failed.", "error");
+      showActionNotice(xlsxError instanceof Error ? xlsxError.message : t("notice.xlsxFailed"), "error");
     }
   }
 
@@ -358,9 +359,9 @@ export function KeywordRadarPanel({ adapter }: { adapter: MarketplaceAdapter }) 
         suggestions,
         listingGapAnalysis
       });
-      showActionNotice(`Saved locally: ${savedRun.suggestions.length} keywords`, "success");
+      showActionNotice(t("notice.savedLocally", { count: savedRun.suggestions.length }), "success");
     } catch (saveError) {
-      showActionNotice(saveError instanceof Error ? saveError.message : "Local save failed.", "error");
+      showActionNotice(saveError instanceof Error ? saveError.message : t("notice.saveFailed"), "error");
     } finally {
       setSaveStatus("idle");
     }
@@ -368,11 +369,11 @@ export function KeywordRadarPanel({ adapter }: { adapter: MarketplaceAdapter }) 
 
   function analyzeCurrentListingGap() {
     if (!listingTitle.trim()) {
-      showActionNotice("Listing title is required.", "error");
+      showActionNotice(t("notice.titleRequired"), "error");
       return;
     }
     if (suggestions.length === 0) {
-      showActionNotice("Collect keywords before analyzing a listing.", "error");
+      showActionNotice(t("notice.collectFirst"), "error");
       return;
     }
 
@@ -386,7 +387,7 @@ export function KeywordRadarPanel({ adapter }: { adapter: MarketplaceAdapter }) 
     );
     setListingGapAnalysis(analysis);
     void writeListingGapPreference(adapter.id, { title: listingTitle, description: listingDescription });
-    showActionNotice("Listing gap analyzed", "success");
+    showActionNotice(t("notice.gapAnalyzed"), "success");
   }
 
   function showActionNotice(message: string, kind: ActionNotice["kind"]) {
@@ -439,9 +440,9 @@ export function KeywordRadarPanel({ adapter }: { adapter: MarketplaceAdapter }) 
   async function copyKeyword(keyword: string) {
     try {
       await writeClipboardText(keyword);
-      showActionNotice("Keyword copied", "success");
+      showActionNotice(t("notice.keywordCopied"), "success");
     } catch (copyError) {
-      showActionNotice(copyError instanceof Error ? copyError.message : "Copy failed.", "error");
+      showActionNotice(copyError instanceof Error ? copyError.message : t("notice.copyFailed"), "error");
     }
   }
 
@@ -783,7 +784,7 @@ export function KeywordRadarPanel({ adapter }: { adapter: MarketplaceAdapter }) 
                   </td>
                   <td>{suggestion.occurrenceCount ?? 1}</td>
                   <td>
-                    <span className={`score-badge score-${getScoreLevel(suggestion.score?.opportunityScore)}`} title={getScoreTitle(suggestion)}>
+                    <span className={`score-badge score-${getScoreLevel(suggestion.score?.opportunityScore)}`} title={getScoreTitle(suggestion, t)}>
                       {suggestion.score?.opportunityScore ?? "-"}
                     </span>
                   </td>
@@ -839,7 +840,7 @@ export function KeywordRadarPanel({ adapter }: { adapter: MarketplaceAdapter }) 
                     listingGapAnalysis.missingHighValueKeywords.slice(0, 5).map((item) => (
                       <p key={item.normalizedKeyword}>
                         <strong>{item.keyword}</strong>
-                        <span>{item.reason}</span>
+                        <span>{formatGapReason(item, t)}</span>
                       </p>
                     ))
                   ) : (
@@ -874,7 +875,7 @@ function sortSuggestionsForDisplay(suggestions: KeywordSuggestion[]): KeywordSug
   });
 }
 
-function buildSalesActions(suggestions: KeywordSuggestion[], seed: string): SalesAction[] {
+function buildSalesActions(suggestions: KeywordSuggestion[], seed: string, t: Translate): SalesAction[] {
   if (suggestions.length === 0) {
     return [];
   }
@@ -894,57 +895,53 @@ function buildSalesActions(suggestions: KeywordSuggestion[], seed: string): Sale
 
   if (topSuggestion) {
     actions.push({
-      title: "Title lead",
-      detail: `Lead with "${topSuggestion.keyword}" in the product title and first bullet.`
+      title: t("action.titleLead"),
+      detail: t("action.titleLeadDetail", { keyword: topSuggestion.keyword })
     });
   }
 
   if (longTailSuggestions.length > 0) {
     actions.push({
-      title: "Long-tail targets",
+      title: t("action.longTail"),
       detail: longTailSuggestions.map((suggestion) => suggestion.keyword).join(", ")
     });
   }
 
   if (repeatedSuggestion) {
     actions.push({
-      title: "Demand signal",
-      detail: `"${repeatedSuggestion.keyword}" appeared ${repeatedSuggestion.occurrenceCount ?? 1} times across expansions.`
+      title: t("action.demandSignal"),
+      detail: t("action.demandSignalDetail", { keyword: repeatedSuggestion.keyword, count: repeatedSuggestion.occurrenceCount ?? 1 })
     });
   }
 
   if (coverageLeader) {
     actions.push({
-      title: "Marketplace coverage",
-      detail: `"${coverageLeader.normalizedKeyword}" is visible on ${coverageLeader.marketplaces.join(", ")}.`
+      title: t("action.coverage"),
+      detail: t("action.coverageDetail", { keyword: coverageLeader.normalizedKeyword, marketplaces: coverageLeader.marketplaces.join(", ") })
     });
   }
 
   if (topWords.length > 0) {
     actions.push({
-      title: "Search terms",
+      title: t("action.searchTerms"),
       detail: topWords.map((item) => item.word).join(", ")
     });
   }
 
-  actions.push(buildAiFitAction(suggestions));
+  actions.push(buildAiFitAction(suggestions, t));
   return actions.slice(0, 6);
 }
 
-function buildAiFitAction(suggestions: KeywordSuggestion[]): SalesAction {
+function buildAiFitAction(suggestions: KeywordSuggestion[], t: Translate): SalesAction {
   const repeatedCount = suggestions.filter((suggestion) => (suggestion.occurrenceCount ?? 1) >= 2).length;
   const highScoreCount = suggestions.filter((suggestion) => (suggestion.score?.opportunityScore ?? 0) >= 64).length;
   const coverageCount = compareMarketplaceCoverage(suggestions).filter((item) => item.count > 1).length;
-  const fit = suggestions.length >= 20 || highScoreCount >= 3 || coverageCount >= 2 ? "High" : suggestions.length >= 6 || repeatedCount >= 1 ? "Medium" : "Low";
-  const detail =
-    fit === "High"
-      ? "Use AI to cluster intent, draft listing copy, and find missing modifiers."
-      : fit === "Medium"
-        ? "AI can help after one more collection pass or a second marketplace comparison."
-        : "Collect more suggestions before relying on AI-generated copy.";
+  const fit = suggestions.length >= 20 || highScoreCount >= 3 || coverageCount >= 2 ? "high" : suggestions.length >= 6 || repeatedCount >= 1 ? "medium" : "low";
+  const level = fit === "high" ? t("aiFit.high") : fit === "medium" ? t("aiFit.medium") : t("aiFit.low");
+  const detail = fit === "high" ? t("action.aiFitHigh") : fit === "medium" ? t("action.aiFitMedium") : t("action.aiFitLow");
 
   return {
-    title: `AI fit: ${fit}`,
+    title: t("action.aiFit", { level }),
     detail
   };
 }
@@ -1172,19 +1169,33 @@ function getScoreLevel(score?: number): "high" | "medium" | "low" | "empty" {
   return "low";
 }
 
-function getScoreTitle(suggestion: KeywordSuggestion): string {
+function getScoreTitle(suggestion: KeywordSuggestion, t: Translate): string {
   const score = suggestion.score;
   if (!score) {
-    return "No score yet";
+    return t("score.none");
   }
 
   return [
-    `Opportunity: ${score.opportunityScore ?? "-"}`,
-    `Frequency: ${score.frequencyScore ?? "-"}`,
-    `Long-tail: ${score.longTailScore ?? "-"}`,
-    `Coverage: ${score.marketplaceCoverageScore ?? "-"}`,
-    `Confidence: ${score.confidenceScore ?? "-"}`
+    `${t("score.opportunity")}: ${score.opportunityScore ?? "-"}`,
+    `${t("score.frequency")}: ${score.frequencyScore ?? "-"}`,
+    `${t("score.longTail")}: ${score.longTailScore ?? "-"}`,
+    `${t("score.coverage")}: ${score.marketplaceCoverageScore ?? "-"}`,
+    `${t("score.confidence")}: ${score.confidenceScore ?? "-"}`
   ].join(" | ");
+}
+
+function formatGapReason(
+  item: { presentInTitle?: boolean; presentInBody?: boolean; opportunityScore?: number; occurrenceCount?: number },
+  t: Translate
+): string {
+  const vars = { opportunity: item.opportunityScore ?? 0, hits: item.occurrenceCount ?? 1 };
+  if (item.presentInTitle) {
+    return t("gap.reasonInTitle", vars);
+  }
+  if (item.presentInBody) {
+    return t("gap.reasonInBody", vars);
+  }
+  return t("gap.reasonMissing", vars);
 }
 
 async function writeClipboardText(value: string): Promise<void> {
