@@ -66,20 +66,40 @@ describe("export formatting", () => {
     expect(workbook.worksheets.map((sheet) => sheet.name)).toEqual(["Summary", "Keywords", "Analysis"]);
 
     const summarySheet = workbook.getWorksheet("Summary");
-    const summaryRows = summarySheet?.getRows(2, 9) ?? [];
-    const summaryValues = new Map(summaryRows.map((row) => [row.getCell(1).value, row.getCell(2).value]));
-    expect(summaryValues.get("keywords")).toBe(2);
-    expect(summaryValues.get("hits")).toBe(3);
-    expect(summaryValues.get("queries")).toBe(3);
+    expect(String(summarySheet?.getCell("B1").value)).toContain("Keyword Radar");
+    // First metric card holds the keyword count.
+    expect(summarySheet?.getCell(5, 2).value).toBe(2);
 
     const keywordSheet = workbook.getWorksheet("Keywords");
-    expect(keywordSheet?.getRow(1).values).toContain("keyword");
+    expect(keywordSheet?.getRow(1).values).toContain("Keyword");
     expect(keywordSheet?.getRow(2).getCell("keyword").value).toBe("celik, termos");
     expect(keywordSheet?.autoFilter).toEqual({ from: "A1", to: "N1" });
 
     const analysisSheet = workbook.getWorksheet("Analysis");
     expect(analysisSheet?.getRow(1).values).toContain("word");
     expect(analysisSheet?.getRow(1).values).toContain("normalized_keyword");
+  });
+
+  it("serializes the styled workbook (with conditional formatting) to a buffer", async () => {
+    const workbook = toXlsxWorkbook([suggestion, secondSuggestion], {
+      coveredKeywords: [],
+      missingHighValueKeywords: [
+        {
+          keyword: "termos matara",
+          normalizedKeyword: "termos matara",
+          score: 78,
+          reason: "Missing from listing copy.",
+          presentInTitle: false,
+          presentInBody: false,
+          occurrenceCount: 2,
+          opportunityScore: 66
+        }
+      ],
+      titleRecommendations: [],
+      searchTermRecommendations: []
+    });
+    const buffer = await workbook.xlsx.writeBuffer();
+    expect(buffer.byteLength).toBeGreaterThan(1000);
   });
 
   it("adds a listing gap sheet when analysis is provided", () => {

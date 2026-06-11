@@ -745,7 +745,7 @@ export function KeywordRadarPanel({ adapter }: { adapter: MarketplaceAdapter }) 
             <Icon name="xlsx" />
             <span>{t("action.xlsx")}</span>
           </button>
-          <button type="button" className="secondary save-run-button" onClick={() => void saveRun()} disabled={suggestions.length === 0 || saveStatus === "saving"} aria-label={t("a11y.saveRun")} title={t("a11y.saveRun")}>
+          <button type="button" className="secondary save-run-button" onClick={() => void saveRun()} disabled={suggestions.length === 0 || saveStatus === "saving"} aria-label={t("a11y.saveRun")} title={t("tooltip.save")}>
             <span>{saveStatus === "saving" ? t("action.saving") : t("action.save")}</span>
           </button>
         </div>
@@ -797,16 +797,16 @@ export function KeywordRadarPanel({ adapter }: { adapter: MarketplaceAdapter }) 
       <div className="analysis-panel">
         <button type="button" className="analysis-resize-handle" onPointerDown={startAnalysisResize} aria-label={t("a11y.resizeAnalysis")} />
         <div className="analysis-tabs" role="tablist" aria-label={t("a11y.analysis")}>
-          <button type="button" className={activeAnalysisTab === "words" ? "active" : ""} onClick={() => setActiveAnalysisTab("words")} role="tab" aria-selected={activeAnalysisTab === "words"}>
+          <button type="button" className={activeAnalysisTab === "words" ? "active" : ""} onClick={() => setActiveAnalysisTab("words")} role="tab" aria-selected={activeAnalysisTab === "words"} title={t("tooltip.words")}>
             {t("tab.words")}
           </button>
-          <button type="button" className={activeAnalysisTab === "coverage" ? "active" : ""} onClick={() => setActiveAnalysisTab("coverage")} role="tab" aria-selected={activeAnalysisTab === "coverage"}>
+          <button type="button" className={activeAnalysisTab === "coverage" ? "active" : ""} onClick={() => setActiveAnalysisTab("coverage")} role="tab" aria-selected={activeAnalysisTab === "coverage"} title={t("tooltip.coverage")}>
             {t("tab.coverage")}
           </button>
-          <button type="button" className={activeAnalysisTab === "actions" ? "active" : ""} onClick={() => setActiveAnalysisTab("actions")} role="tab" aria-selected={activeAnalysisTab === "actions"}>
+          <button type="button" className={activeAnalysisTab === "actions" ? "active" : ""} onClick={() => setActiveAnalysisTab("actions")} role="tab" aria-selected={activeAnalysisTab === "actions"} title={t("tooltip.actions")}>
             {t("tab.actions")}
           </button>
-          <button type="button" className={activeAnalysisTab === "gap" ? "active" : ""} onClick={() => setActiveAnalysisTab("gap")} role="tab" aria-selected={activeAnalysisTab === "gap"}>
+          <button type="button" className={activeAnalysisTab === "gap" ? "active" : ""} onClick={() => setActiveAnalysisTab("gap")} role="tab" aria-selected={activeAnalysisTab === "gap"} title={t("tooltip.gap")}>
             {t("tab.gap")}
           </button>
         </div>
