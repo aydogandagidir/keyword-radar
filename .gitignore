@@ -34,3 +34,7 @@ Thumbs.db
 
 # Claude Code local settings
 .claude/settings.local.json
+
+# Demo video generation (temp frames / raw recordings — regenerate via `pnpm demo`)
+marketing/video/_raw/
+marketing/video/_frames/
