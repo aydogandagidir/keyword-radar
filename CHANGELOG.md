@@ -3,9 +3,11 @@
 Tüm önemli değişiklikler bu dosyada belgelenir.
 Format [Keep a Changelog](https://keepachangelog.com/tr/1.1.0/) standardına, sürümleme [SemVer](https://semver.org/lang/tr/) kurallarına dayanır.
 
-## [Yayınlanmamış]
+## [0.1.0] — 2026-06-12
 
-Chrome Web Store ilk gönderimine hazırlık. Henüz mağazada yayınlanmadı.
+🚀 **Chrome Web Store'da yayınlandı:** <https://chromewebstore.google.com/detail/bluedev-marketplace-keywo/kfhmfhploepjpepkgddhodbnfnjmgdmp>
+
+İlk herkese açık sürüm. Dört Türk pazaryeri (Amazon.com.tr · Trendyol · Hepsiburada · n11), world-class XLSX raporu, tam iki dilli panel, gerçek görseller + demo videosu.
 
 ### ✨ Eklendi
 - İki dilli dökümantasyon: `README.md` (TR) + `README.en.md` (EN), `LICENSE` (Proprietary, EN+TR), kök `PRIVACY.md`, bu `CHANGELOG.md`.
@@ -26,7 +28,7 @@ Chrome Web Store ilk gönderimine hazırlık. Henüz mağazada yayınlanmadı.
 
 ---
 
-## [0.1.0] — 2026-06-08
+## Geliştirme temeli — 2026-06-08 (ilk MVP)
 
 First MVP. Core keyword collection, scoring, and export for Turkish marketplaces.
 

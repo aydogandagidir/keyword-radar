@@ -12,6 +12,8 @@ normalize eder, skorlar ve dışa aktarır; böylece satıcılar listelerini **g
 
 **🇹🇷 Türkçe** · [English](README.en.md)
 
+### [🛰️ Chrome Web Store'dan Ücretsiz Yükle →](https://chromewebstore.google.com/detail/bluedev-marketplace-keywo/kfhmfhploepjpepkgddhodbnfnjmgdmp)
+
 [![CI](https://github.com/aydogandagidir/keyword-radar/actions/workflows/ci.yml/badge.svg)](https://github.com/aydogandagidir/keyword-radar/actions/workflows/ci.yml)
 ![Manifest V3](https://img.shields.io/badge/Manifest-V3-4285F4?logo=googlechrome&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)

@@ -12,6 +12,8 @@ normalizes, scores, and exports them so sellers can write listings around real d
 
 **English** · [🇹🇷 Türkçe](README.md)
 
+### [🛰️ Install free from the Chrome Web Store →](https://chromewebstore.google.com/detail/bluedev-marketplace-keywo/kfhmfhploepjpepkgddhodbnfnjmgdmp)
+
 [![CI](https://github.com/aydogandagidir/keyword-radar/actions/workflows/ci.yml/badge.svg)](https://github.com/aydogandagidir/keyword-radar/actions/workflows/ci.yml)
 ![Manifest V3](https://img.shields.io/badge/Manifest-V3-4285F4?logo=googlechrome&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)
